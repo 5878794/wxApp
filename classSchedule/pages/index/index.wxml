@@ -1,0 +1,9 @@
+<view class='box_h'>
+    <view class="cel {{(index==week)? 'ggg' : 'aaa'}}" wx:key='item' wx:for="{{classSchedule}}">
+        <view class='main' wx:for-item='text' wx:for="{{item}}">
+            <view wx:if='{{index==4}}' class='row redLine center' >{{text}}</view>
+            <view wx:elif='{{index==0}}' class='row topLine center'>{{text}}</view>
+            <view wx:else class='row center'>{{text}}</view>
+        </view>
+    </view>
+</view>
