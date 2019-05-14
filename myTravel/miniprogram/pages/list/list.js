@@ -41,31 +41,14 @@ Page({
         app.globalData.openId = openId;
 
 
-        wxApp.openUrl('../list/list');
+        wxApp.openUrl('./list/list');
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
-    onLoad:async function (options) {
-        let userInfo = await sys.getUserInfo();
+    onLoad: function (options) {
 
-        if(userInfo){
-            this.setData({
-                icon_img:userInfo.userInfo.avatarUrl
-            });
-
-            await wxApp.sleep(500);
-
-            this.setData({
-                logged: true,
-                icon_img: userInfo.userInfo.avatarUrl,
-                userInfo: userInfo.userInfo,
-                class_icon:'show_icon',
-                class_btn:'show_btn'
-            });
-            app.globalData.userInfo = userInfo.userInfo;
-        }
     },
 
     /**

@@ -1,4 +1,4 @@
-var amapFile = require('../..//lib/amap-wx.js');//如：..­/..­/libs/amap-wx.js
+var amapFile = require('../..//lib/gdMap/amap-wx.js');//如：..­/..­/libs/amap-wx.js
 
 var markersData = [];
 Page({
