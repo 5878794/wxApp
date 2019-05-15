@@ -1,8 +1,14 @@
 {
     "pages": [
-        "pages/add/add",
+        "pages/save/save",
+
+
         "pages/index/index",
         "pages/list/list",
+        "pages/add/add",
+
+
+
         "pages/map/index"
     ],
     "window": {

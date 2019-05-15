@@ -1,0 +1,22 @@
+
+
+<view class="main">
+    <map class="map" id="map" include-points="{{markers_include}}" longitude="{{longitude}}" latitude="{{latitude}}" scale="{{scale}}" show-location="true" markers="{{markers}}" bindmarkertap="makertap"></map>
+</view>
+
+<view class="title box_hcc">{{title}}</view>
+
+<scroll-view
+    scroll-y = 'false'
+    scroll-x = 'true'
+    class="images"
+>
+    <view class="box_hlt" style="width:{{imgUrls.length*300}}rpx;">
+        <block wx:for="{{imgUrls}}">
+            <image bindtap="showBigImage" src="{{item}}" data-src="{{item}}" class="slide-image" width="355" height="150" />
+        </block>
+    </view>
+</scroll-view>
+
+<view bindtap="savePoint" class="btn canActive">保存地点</view>
+
