@@ -17,3 +17,6 @@
     </view>
 
 </view>
+
+
+<view bindtap="openAdd" class="add">添加</view>

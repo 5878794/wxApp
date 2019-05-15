@@ -39,7 +39,7 @@ Page({
         //     }
         // }).get();
 
-        //TODO 分页  下拉加载  刷新
+        //TODO 分页  下拉加载  刷新 距离排序
         let data = await address.where(_.or([
             {name: {$regex: '.*'+searchText+'.*'}},
             {address:{$regex: '.*'+searchText+'.*'}},
@@ -123,6 +123,11 @@ Page({
         }).catch(e=>{
             wxApp.alert(e);
         })
+    },
+
+
+    openAdd(){
+        wxApp.openUrl('../add/add');
     },
 
 

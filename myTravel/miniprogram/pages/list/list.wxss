@@ -42,3 +42,11 @@
 .list_jl{
   text-align: right;
 }
+
+.add{
+  position: fixed; right:40rpx; bottom:40rpx;
+  width: 100rpx; height: 100rpx; border-radius: 100rpx;
+  opacity:0.6;
+  background: #ccc;
+  text-align: center; line-height: 100rpx;
+}
