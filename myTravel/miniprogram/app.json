@@ -21,8 +21,7 @@
         "backgroundTextStyle": "light",
         "navigationBarBackgroundColor": "#F6F6F6",
         "navigationBarTitleText": "bens",
-        "navigationBarTextStyle": "black",
-        "navigationStyle":"custom"
+        "navigationBarTextStyle": "black"
     },
     "sitemapLocation": "sitemap.json"
 }

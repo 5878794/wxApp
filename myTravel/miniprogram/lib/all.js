@@ -128,7 +128,7 @@ module.exports = {
     //打开新页面
     //@param:url   str
     openUrl(url) {
-        wx.redirectTo({ url: url });
+        wx.navigateTo({ url: url });
     },
     closeAndOpenUrl(url){
         wx.redirectTo({url:url});
