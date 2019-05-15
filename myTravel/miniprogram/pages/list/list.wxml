@@ -1,16 +1,6 @@
-<view class="login_bg box_scc">
-    <image src="../../images/login_bg.jpeg"></image>
+<view class="padding_top"></view>
 
-    <!--submit-->
-    <button class="animate1 btn {{class_btn}}"
-            bindtap="login">
-        进入
-    </button>
 
-    <!--icon-->
-    <button open-type="getUserInfo"
-            bindgetuserinfo="onGetUserInfo"
-            class="animate1 icon {{class_icon}}"
-            style="background-image: url({{icon_img}})">
-    </button>
+<view class="search">
+    <input type="text" id="search" name="search" />
 </view>

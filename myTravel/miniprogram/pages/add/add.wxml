@@ -1,0 +1,17 @@
+<view class="main">
+    <view class="padding_top"></view>
+
+
+    <view class="search box_hcc">
+        <input bindinput='setInputVal' class="boxflex1" type="text" value="{{search}}" id="search" name="search"></input>
+        <view bindtap="searchVal" class="canActive">搜索</view>
+    </view>
+    <view class="searchList">
+        <view wx:for='{{searchList}}' wx:key='item.id'  bindtap="selectData" data-data="{{item}}">{{item.name}}</view>
+    </view>
+
+
+    <view class="history boxflex1 box_sct">
+        <view wx:for='{{searchHistory}}'  bindtap="searchFromHistoryData" data-data="{{item}}">{{item}}</view>
+    </view>
+</view>

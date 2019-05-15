@@ -1,0 +1,53 @@
+page{
+  width: 100%; height: 100%;
+}
+
+.main{
+  width: 100%; height: 100%;
+}
+.search{
+  width: 100%; height: 80rpx;
+  padding: 0 40rpx;
+}
+.search input{
+  height: 60rpx;
+  background: #ccc;
+  border-radius:40rpx;
+  box-sizing: border-box;
+  padding:0 40rpx;
+}
+.search view{
+  display: block;
+  width: 140rpx; height: 60rpx;
+  background: dodgerblue;
+  color: #fff;
+  border-radius: 40rpx;
+  text-align: center;
+  line-height: 60rpx;
+  margin-left:40rpx;
+}
+
+.searchList{
+  width: 100%; padding: 0 40rpx;
+  position: absolute; left:0; top:200rpx;
+  z-index: 1000;
+}
+.searchList view{
+  width: 100%; height: 80rpx; line-height: 80rpx;
+  background: #fff;
+  font-size: 26rpx; color: #000;
+  border-bottom:1rpx solid #eee;
+}
+
+
+.history{
+  position: absolute;
+  left:0; top:200rpx; right:0;bottom:0;
+  padding-top:50rpx; box-sizing: border-box;
+}
+.history view{
+  width: 90%;
+  height:80rpx; line-height: 80rpx;
+  color: #007aff;
+  font-size:36rpx;
+}
