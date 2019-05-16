@@ -27,7 +27,7 @@ page{
 
 .searchList{
   width: 100%; padding: 0 40rpx;
-  position: absolute; left:0; top:200rpx;
+  position: absolute; left:0; top:80rpx;
   z-index: 1000;
 }
 .searchList view{
@@ -40,7 +40,7 @@ page{
 
 .history{
   position: absolute;
-  left:0; top:200rpx; right:0;bottom:0;
+  left:0; top:80rpx; right:0;bottom:0;
   padding-top:50rpx; box-sizing: border-box;
 }
 .history view{

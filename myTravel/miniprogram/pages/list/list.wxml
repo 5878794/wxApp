@@ -11,7 +11,7 @@
     <view class="box_slc item" wx:for="{{listData}}" wx:key="_id">
         <view class="list_name">{{item.name}}</view>
         <view class="list_info box_hlc">
-            <view class="list_area">{{item.pname}} {{item.cityname}}</view>
+            <view class="list_area diandian">{{item.pname}} {{item.cityname}}</view>
             <view class="boxflex1 list_jl"><text>直线距离:</text>{{item.zxjl}}<text>km</text></view>
         </view>
     </view>

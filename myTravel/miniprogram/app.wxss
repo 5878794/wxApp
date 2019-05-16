@@ -1,6 +1,3 @@
 @import "./style/all.wxss";
 
 
-.padding_top{
-  padding-top:120rpx; width: 100%; height: 0;
-}

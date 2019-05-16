@@ -37,7 +37,7 @@
 }
 
 .list_area{
-  width: 300rpx;
+  width: 400rpx;
 }
 .list_jl{
   text-align: right;
