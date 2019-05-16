@@ -129,6 +129,7 @@ Page({
             data = this.data.points[n];
 
         data.photos = this.data.imgUrls;
+        data.bz = '';
 
         this.updateDataToServer(data).then(rs=>{
             wxApp.goBack();
@@ -146,7 +147,7 @@ Page({
             data:data,
         });
 
-        wxApp.alert('保存成功！');
+        await wxApp.alert('保存成功！');
     },
 
     /**
