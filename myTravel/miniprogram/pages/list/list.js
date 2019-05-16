@@ -230,7 +230,7 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad:function (options) {
-        // this.refreshPage();
+        this.refreshPage();
     },
 
     /**
@@ -244,7 +244,10 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
-        this.refreshPage();
+        if(app.globalData.needRefresh){
+            app.globalData.needRefresh = false;
+            this.refreshPage();
+        }
     },
 
     /**

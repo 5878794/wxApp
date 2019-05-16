@@ -133,6 +133,7 @@ Page({
 	    data.hasGo = 0; //0 未去  1：已去
 
         this.updateDataToServer(data).then(rs=>{
+            app.globalData.needRefresh = true;
             wxApp.goBack();
         }).catch(rs=>{
             wxApp.alert(rs)
