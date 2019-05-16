@@ -17,13 +17,13 @@ Page({
     data: {
         //原始数据
         list:[],
-        //显示用数据
-        listData:[],
         //我的位置
         myLocation:{},
         locationGetTime:0,
 
-        search:''
+        search:'',
+        pageSize:10,
+        nowIndex:0
     },
 
     setInputVal:setInputVal,
@@ -33,13 +33,7 @@ Page({
         const address = db.collection('address');
         const _ = db.command;
 
-        // let data = await address.where({
-        //     name: {
-        //         $regex: '.*'+searchText+'.*'
-        //     }
-        // }).get();
 
-        //TODO 分页  下拉加载  刷新 距离排序
         let data = await address.where(_.or([
             {name: {$regex: '.*'+searchText+'.*'}},
             {address:{$regex: '.*'+searchText+'.*'}},
@@ -47,22 +41,24 @@ Page({
             {pname:{$regex: '.*'+searchText+'.*'}}
         ]))
             .orderBy('pname','asc')
-            .limit(20)
-            .skip(0)
+            .limit(this.data.pageSize)
+            .skip(this.data.nowIndex)
             .get();
 
 
         data = data.data || [];
 
+
+        //分页合并数据
+        let newData = this.data.list;
         data.map(rs=>{
-           rs.zxjl = '计算中...';
+            rs.zxjl = '计算中...';
+            newData.push(rs);
         });
 
         this.setData({
-            list:data,
-            listData:data
+            list:newData
         });
-        console.log(data);
     },
 
     getMyLocation(){
@@ -106,10 +102,8 @@ Page({
             jl = (jl/1000).toFixed(1);
 
             rs.zxjl = jl;
-            console.log(jl)
         });
 
-        //对象 内存地址相同 不需要更新正在使用的数据
         this.setData({
             list:data
         })
@@ -117,7 +111,10 @@ Page({
 
     searchVal(){
         let val = this.data.search;
-
+        this.setData({
+            nowIndex:0,
+            list:[]
+        });
         this.init(val).then(rs=>{
 
         }).catch(e=>{
@@ -131,6 +128,24 @@ Page({
     },
 
 
+    //刷新页面
+    refreshPage(callback){
+        callback = callback || function(){};
+        this.setData({
+            search:'',
+            nowIndex:0,
+            list:[]
+        });
+        this.init().then(rs=>{
+            callback();
+        }).catch(e=>{
+            callback();
+            wxApp.alert(e);
+        })
+    },
+
+
+
     async init(searchText){
         searchText = searchText || '';
 
@@ -138,21 +153,12 @@ Page({
         await this.getMyLocation();
         this.refreshListJl();
 
-        this.setData({
-            listData:this.data.list
-        })
-
-
     },
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad:function (options) {
-        this.init().then(rs=>{
-
-        }).catch(e=>{
-            wxApp.alert(e);
-        })
+        // this.refreshPage();
     },
 
     /**
@@ -166,11 +172,7 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
-        this.init().then(rs=>{
-
-        }).catch(e=>{
-            wxApp.alert(e);
-        })
+        this.refreshPage();
     },
 
     /**
@@ -191,13 +193,28 @@ Page({
      * 页面相关事件处理函数--监听用户下拉动作
      */
     onPullDownRefresh: function () {
-
+        this.refreshPage(function(){
+            wx.stopPullDownRefresh();
+        });
     },
 
     /**
      * 页面上拉触底事件的处理函数
      */
     onReachBottom: function () {
+        let index = this.data.nowIndex,
+            search = this.data.search;
+        index += this.data.pageSize;
+
+        this.setData({
+            nowIndex:index
+        });
+
+        this.init(search).then(rs=>{
+
+        }).catch(e=>{
+            wxApp.alert(e);
+        })
 
     },
 

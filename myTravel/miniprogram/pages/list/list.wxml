@@ -2,13 +2,13 @@
 
 
 <view class="search box_hcc">
-    <input class="boxflex1" placeholder="请输入查询内容" type="text" bindinput="setInputVal" id="search" name="search" />
+    <input class="boxflex1" value="{{search}}" placeholder="请输入查询内容" type="text" bindinput="setInputVal" id="search" name="search" />
     <view class="canActive" bindtap="searchVal">搜索</view>
 </view>
 
 
 <view class="list">
-    <view class="box_slc item" wx:for="{{listData}}" wx:key="_id">
+    <view class="box_slc item" wx:for="{{list}}" wx:key="id">
         <view class="list_name">{{item.name}}</view>
         <view class="list_info box_hlc">
             <view class="list_area diandian">{{item.pname}} {{item.cityname}}</view>
