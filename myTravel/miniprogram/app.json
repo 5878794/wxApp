@@ -1,15 +1,9 @@
 {
     "pages": [
-
-
-
         "pages/index/index",
         "pages/list/list",
         "pages/add/add",
-        "pages/save/save",
-
-
-        "pages/map/index"
+        "pages/save/save"
     ],
     "permission": {
         "scope.userLocation": {

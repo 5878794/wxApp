@@ -8,7 +8,7 @@
 .search input{
   background: #eee; border-radius:40rpx;
   height: 40rpx; margin-right: 20rpx;
-  padding:0 40rpx;
+  padding:0 40rpx; font-size:32rpx;
 }
 
 .search view{

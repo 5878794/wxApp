@@ -1,7 +1,6 @@
 .page{
     width:750rpx;
     min-height:100%;
-    overflow-x:hidden;
 }
 
 view{

@@ -3,7 +3,7 @@
 
 
     <view class="search box_hcc">
-        <input bindinput='setInputVal' class="boxflex1" type="text" value="{{search}}" id="search" name="search"></input>
+        <input placeholder="请输入新增地点" bindinput='setInputVal' class="boxflex1" type="text" value="{{search}}" id="search" name="search"></input>
         <view bindtap="searchVal" class="canActive">搜索</view>
     </view>
     <view class="searchList">
