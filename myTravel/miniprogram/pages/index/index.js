@@ -41,7 +41,7 @@ Page({
         app.globalData.openId = openId;
 
 
-        wxApp.openUrl('../list/list');
+        wxApp.closeAndOpenUrl('../list/list');
     },
 
     /**
