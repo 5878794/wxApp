@@ -111,7 +111,6 @@ Page({
     },
 
     showBigImage(e){
-        console.log(e);
         let imgUrls = this.data.imgUrls,
             url = e.target.dataset.src;
 
