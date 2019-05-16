@@ -22,7 +22,7 @@ Page({
         locationGetTime:0,
 
         search:'',
-        pageSize:10,
+        pageSize:20,
         nowIndex:0
     },
 
