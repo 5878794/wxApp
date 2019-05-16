@@ -23,7 +23,10 @@ Page({
 
         search:'',
         pageSize:20,
-        nowIndex:0
+        nowIndex:0,
+
+        //是否显示删除
+        showDel:false
     },
 
     setInputVal:setInputVal,
@@ -53,6 +56,7 @@ Page({
         let newData = this.data.list;
         data.map(rs=>{
             rs.zxjl = '计算中...';
+            rs.style = 0;
             newData.push(rs);
         });
 
@@ -144,7 +148,75 @@ Page({
         })
     },
 
+    //长按显示删除按钮
+    longtap(e){
+        let id = e.currentTarget.dataset.id,
+            data = this.data.list;
 
+        data.map(rs=>{
+            if(rs.id == id){
+                rs.style = -140;
+            }else{
+                rs.style = 0;
+            }
+        });
+
+        this.setData({
+            showDel:true,
+            list:data
+        })
+
+    },
+    //列表点击    在显示删除按钮时关闭删除按钮，没显示时页面跳转到详情
+    listTap(e){
+        //在显示删除
+        if(this.data.showDel){
+            //关闭删除按钮
+            let data = this.data.list;
+            data.map(rs=>{
+               rs.style=0;
+            });
+
+            this.setData({
+                list:data,
+                showDel:false
+            });
+            return;
+        }
+
+
+        //跳转
+        let id = e.currentTarget.dataset.id;
+
+        wxApp.openUrl('../info/info?id='+id);
+
+    },
+
+
+    async delList(e){
+        let id = e.currentTarget.dataset.id;
+
+        const db = wx.cloud.database();
+        const address = db.collection('address');
+
+        await address.doc(id).remove();
+
+        await wxApp.alert('删除成功！');
+
+        //删除数据
+        let data=  this.data.list,
+            newData = [];
+        data.map(rs=>{
+            if(rs._id != id){
+                newData.push(rs);
+            }
+        });
+
+        this.setData({
+           list:newData
+        });
+
+    },
 
     async init(searchText){
         searchText = searchText || '';
@@ -224,4 +296,8 @@ Page({
     onShareAppMessage: function () {
 
     }
-})
+
+
+
+
+});

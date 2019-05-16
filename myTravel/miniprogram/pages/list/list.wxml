@@ -1,3 +1,5 @@
+
+
 <view class="padding_top"></view>
 
 
@@ -8,12 +10,13 @@
 
 
 <view class="list">
-    <view class="box_slc item" wx:for="{{list}}" wx:key="id">
+    <view bind:longpress="longtap" bind:tap="listTap" class="box_slc item animate1" wx:for="{{list}}" wx:key="id" data-id="{{item.id}}" style="transform:translateX({{item.style}}rpx)">
         <view class="list_name">{{item.name}}</view>
         <view class="list_info box_hlc">
             <view class="list_area diandian">{{item.pname}} {{item.cityname}}</view>
             <view class="boxflex1 list_jl"><text>直线距离:</text>{{item.zxjl}}<text>km</text></view>
         </view>
+        <view catch:tap="delList" class="list_del box_hcc" data-id="{{item._id}}">删除</view>
     </view>
 
 </view>

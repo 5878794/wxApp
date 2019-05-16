@@ -20,10 +20,10 @@
 
 
 .list{
-  padding: 20rpx 40rpx;
+  padding: 20rpx 0rpx; position: relative;
 }
 .list .item{
-  width: 100%; padding: 20rpx 0;
+  width: 100%; padding: 20rpx 40rpx;
   border-bottom:1rpx solid #ccc;
 }
 .list_name{
@@ -49,4 +49,11 @@
   opacity:0.6;
   background: #ccc;
   text-align: center; line-height: 100rpx;
+}
+
+.list_del{
+  position: absolute;
+  top:0; bottom:0; left:100%; right:-140rpx;
+  background: red; color: #fff;
+  font-size:36rpx;
 }
