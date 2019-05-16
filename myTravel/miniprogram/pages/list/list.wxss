@@ -3,24 +3,26 @@
 .search{
   padding:20rpx 40rpx; width: 100%; box-sizing: border-box;
   height: 80rpx;
+  margin-top:20rpx;
 }
 
 .search input{
-  background: #eee; border-radius:40rpx;
-  height: 40rpx; margin-right: 20rpx;
+  background: #eee; border-radius:60rpx;
+  height: 60rpx; margin-right: 20rpx;
   padding:0 40rpx; font-size:32rpx;
 }
 
 .search view{
   background: dodgerblue; color: #fff;
-  font-size: 32rpx; border-radius: 20rpx;
-  width: 120rpx; height: 40rpx;
-  text-align: center; line-height: 40rpx;
+  font-size: 32rpx; border-radius: 60rpx;
+  width: 120rpx; height: 60rpx;
+  text-align: center; line-height: 60rpx;
 }
 
 
 .list{
   padding: 20rpx 0rpx; position: relative;
+  width: 100%; overflow-x: hidden;
 }
 .list .item{
   width: 100%; padding: 20rpx 40rpx;
