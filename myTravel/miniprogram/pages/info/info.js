@@ -21,6 +21,7 @@ Page({
         title:'',
         address:'',
         imgUrls:[],
+        location:'',
         text:'',
         hasGo:0,   //0未去  1已去
         textNotCanEdit:false,
@@ -38,9 +39,10 @@ Page({
         }
 
         data = data[0];
-
+console.log(data)
         this.setData({
             title:data.name,
+            location:data.location,
             address:data.pname+' '+data.cityname+' '+data.adname+' '+data.address,
             imgUrls:data.photos,
             text:data.bz || '',
@@ -198,6 +200,22 @@ Page({
             borders[src] = null;
             this.setData({border:borders});
         })
+    },
+
+    openMap(e){
+        let location = e.target.dataset.location;
+        location = location.split(',');
+
+        let lon = location[0]*1,
+            lat = location[1]*1;
+
+        wx.openLocation({
+            latitude:lat,
+            longitude:lon,
+            scale: 18
+        })
+
+
     },
 
     addImagePathToServer(imgSrc){

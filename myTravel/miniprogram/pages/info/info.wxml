@@ -1,7 +1,7 @@
 
 
 <view class="title">{{title}}</view>
-<view class="address">{{address}}</view>
+<view bindtap="openMap" data-location="{{location}}" class="address">{{address}}</view>
 
 
 
