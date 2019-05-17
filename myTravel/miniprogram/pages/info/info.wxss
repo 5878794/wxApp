@@ -34,6 +34,15 @@
 
 }
 
+.addImage{
+  width: 80%; height: 80rpx; line-height: 80rpx;
+  text-align: center; color: #fff;
+  background: dodgerblue;
+  border-radius: 40rpx;
+  margin: 0 auto;
+  margin-top: 40rpx;
+  margin-bottom:80rpx;
+}
 
 .btn{
   width: 80%; height: 80rpx; line-height: 80rpx;

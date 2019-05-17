@@ -2,6 +2,7 @@ const regeneratorRuntime = require('../../lib/regeneratorRuntime.js'),
     gd = require('../../lib/gdMap/gd.js'),
     inputVal = require('../../lib/wxPublish/getInputVal.js'),
     wxApp = require('../../lib/all.js'),
+    md5 = require('../../lib/fn/md5.js'),
     app = getApp();
 
 
@@ -132,6 +133,69 @@ Page({
             this.setData({hasGoCanTap:true});
         });
 
+    },
+
+    async addImage(){
+        let time = new Date().getTime(),
+            openId = md5(app.globalData.openId),
+            fileName = openId+'_'+time;
+
+        wx.chooseImage({
+            success: chooseResult => {
+                let file = chooseResult.tempFilePaths || [];
+                file = file[0] || '';
+                fileName += file.substr(file.lastIndexOf('.'));
+
+                wxApp.loading.show('上传中');
+                // 将图片上传至云存储空间
+                wx.cloud.uploadFile({
+                    // 指定上传到的云路径
+                    cloudPath: fileName,
+                    // 指定要上传的文件的小程序临时文件路径
+                    filePath: chooseResult.tempFilePaths[0],
+                    // 成功回调
+                    success: async res => {
+                        let path = res.fileID;
+
+                        this.addImagePathToServer(path).then(rs=>{
+                            wxApp.loading.hide();
+                            wxApp.info.show('上传成功');
+                        }).catch(e=>{
+                            wxApp.loading.hide();
+                            wxApp.alert(e);
+                        });
+                    },
+                    error:e=>{
+                        wxApp.loading.hide();
+                        wxApp.alert(e);
+                    }
+                })
+            },
+        })
+    },
+
+    addImagePathToServer(imgSrc){
+        return new Promise(async (success,error)=>{
+            let imgs = this.data.imgUrls || [];
+            imgs.unshift(imgSrc);
+
+            const db = wx.cloud.database();
+            const address = db.collection('address');
+
+            await address.doc(this.data._id).update({
+                data:{
+                    photos:imgs
+                }
+            }).then(rs=>{
+                this.setData({
+                    imgUrls:imgs
+                });
+
+                success();
+            }).catch(async e=>{
+                error(e);
+            });
+        })
     },
 
 

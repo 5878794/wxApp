@@ -250,7 +250,7 @@ Page({
 
         //需要更新 去没去过的ui
         let _id = app.globalData.hasGoId;
-        if(app.globalData.hasGoId){
+        if(_id){
             let data = this.data.list;
 
             data.map(rs=>{
@@ -261,10 +261,10 @@ Page({
 
             this.setData({
                 list:data
-            })
+            });
 
-
-
+            app.globalData.hasGoId = null;
+            app.globalData.hasGoVal = null;
         }
     },
 

@@ -16,6 +16,7 @@
         </block>
     </view>
 </scroll-view>
+<view bindtap="addImage" class="canActive addImage">增加图片</view>
 
 
 <textarea disabled="{{textNotCanEdit}}" bindconfirm="submitBz" class="texts" maxlength="500" value="{{text}}" bindblur="bindTextAreaBlur" auto-height="true" placeholder="请输入备注" />

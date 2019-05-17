@@ -30,7 +30,7 @@ module.exports = {
 					// console.log('[云函数] [login] user openid: ', res.result.openid)
 					// app.globalData.openid = res.result.openid
 					// console.log(res)
-					success(res);
+					success(res.requestID);
 					// wx.navigateTo({
 					//   url: '../userConsole/userConsole',
 					// })
