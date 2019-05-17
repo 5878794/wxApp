@@ -161,6 +161,12 @@ Page({
         let data = await gd.searchKeyWord(search);
         data = data.pois || [];
 
+        if(data.length == 0){
+            await wxApp.alert('未找到你要去地方');
+            wxApp.goBack();
+            return;
+        }
+
         this.setData({
             points:data
         });
