@@ -24,7 +24,8 @@ Page({
         text:'',
         hasGo:0,   //0未去  1已去
         textNotCanEdit:false,
-        hasGoCanTap:true
+        hasGoCanTap:true,
+        border:{}
     },
 
     async init(id){
@@ -174,6 +175,31 @@ Page({
         })
     },
 
+    delImg(e){
+        let src = e.target.dataset.src,
+            borders = this.data.border;
+
+        borders[src] = true;
+        this.setData({border:borders});
+
+
+
+        wxApp.confirm('确定要删除图片么？').then(rs=>{
+            this.delImagePathToServer(src).then(rs=>{
+                wxApp.info.show('删除成功！');
+            }).catch(e=>{
+                let borders = this.data.border;
+                borders[src] = null;
+                this.setData({border:borders});
+                wxApp.alert(e);
+            });
+        }).catch(rs=>{
+            let borders = this.data.border;
+            borders[src] = null;
+            this.setData({border:borders});
+        })
+    },
+
     addImagePathToServer(imgSrc){
         return new Promise(async (success,error)=>{
             let imgs = this.data.imgUrls || [];
@@ -181,6 +207,40 @@ Page({
 
             const db = wx.cloud.database();
             const address = db.collection('address');
+
+            await address.doc(this.data._id).update({
+                data:{
+                    photos:imgs
+                }
+            }).then(rs=>{
+                this.setData({
+                    imgUrls:imgs
+                });
+
+                success();
+            }).catch(async e=>{
+                error(e);
+            });
+        })
+    },
+
+    delImagePathToServer(imgSrc){
+        return new Promise(async (success,error)=>{
+            let imgs = this.data.imgUrls || [],
+                n = imgs.indexOf(imgSrc);
+            imgs.splice(n,1);
+
+            const db = wx.cloud.database();
+            const address = db.collection('address');
+
+
+            wx.cloud.deleteFile({
+                fileList: [imgSrc],
+                success: res => {
+                    // handle success
+                    // console.log(res.fileList)
+                }
+            });
 
             await address.doc(this.data._id).update({
                 data:{

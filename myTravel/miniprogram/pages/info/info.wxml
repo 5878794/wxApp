@@ -12,7 +12,16 @@
 >
     <view class="box_hlt" style="width:{{imgUrls.length*300}}rpx;">
         <block wx:for="{{imgUrls}}">
-            <image bindtap="showBigImage" src="{{item}}" data-src="{{item}}" class="slide-image" width="355" height="150" />
+            <image
+                    bindtap="showBigImage"
+                    bind:longpress="delImg"
+                    src="{{item}}"
+                    data-src="{{item}}"
+                    class="slide-image"
+                    width="355"
+                    height="150"
+                    style="border:5rpx solid {{(border[item])? 'red' : 'transparent'}}"
+            />
         </block>
     </view>
 </scroll-view>
