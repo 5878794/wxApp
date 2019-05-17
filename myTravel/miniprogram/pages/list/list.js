@@ -191,9 +191,42 @@ Page({
 
     },
 
+    //获取要删除的列表的图片数据
+    getDelListImages(id){
+        //获取添加的图片数据
+        let data1 = this.data.list,
+            imgs = [];
+        data1.map(rs=>{
+            if(rs._id == id){
+                imgs = rs.photos;
+            }
+        });
+
+        let newImgs = [];
+        imgs.map(rs=>{
+           if(rs.substr(0,5)=='cloud'){
+               newImgs.push(rs);
+           }
+        });
+
+        return newImgs;
+
+    },
 
     async delList(e){
-        let id = e.currentTarget.dataset.id;
+        let id = e.currentTarget.dataset.id,
+            imgs = this.getDelListImages(id);
+
+        if(imgs.length !=0){
+            wx.cloud.deleteFile({
+                fileList: imgs,
+                success: res => {
+                    // handle success
+                    // console.log(res.fileList)
+                }
+            });
+        }
+
 
         const db = wx.cloud.database();
         const address = db.collection('address');
