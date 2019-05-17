@@ -1,9 +1,11 @@
 {
     "pages": [
+        "pages/info/info",
+
 
         "pages/index/index",
         "pages/list/list",
-        "pages/info/info",
+
         "pages/add/add",
         "pages/save/save"
     ],

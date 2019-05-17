@@ -15,22 +15,140 @@ Page({
      * 页面的初始数据
      */
     data: {
+        data:{},
+        _id:'',
+        title:'',
+        address:'',
+        imgUrls:[],
+        text:'',
+        hasGo:0,   //0未去  1已去
+        textNotCanEdit:false,
+        hasGoCanTap:true
+    },
+
+    async init(id){
+        let data = await this.getDataFromServer(id);
+        data = data.data || [];
+        if(data.length == 0){
+            await wxApp.alert('地点已删除！');
+            wxApp.goBack();
+            return;
+        }
+
+        data = data[0];
+
+        this.setData({
+            title:data.name,
+            address:data.pname+' '+data.cityname+' '+data.adname+' '+data.address,
+            imgUrls:data.photos,
+            text:data.bz || '',
+            hasGo:data.hasGo || 0,
+            _id:data._id,
+            data:data
+        });
+    },
+
+    showBigImage(e){
+        let imgUrls = this.data.imgUrls,
+            url = e.target.dataset.src;
+
+        wx.previewImage({
+            current: url,
+            urls: imgUrls,
+            success(res) {
+                // console.log(res)
+            }
+        })
+    },
+
+    async getDataFromServer(id){
+        const db = wx.cloud.database();
+        const address = db.collection('address');
+
+        return await address.where({
+                id:id
+            }).get();
+    },
+
+    async submitBz(e){
+        let val = e.detail.value,
+            newData = this.data.data;
+        newData.bz = val;
+
+        //阻止text可编辑
+        this.setData({textNotCanEdit:true});
+
+        //提交数据
+        const db = wx.cloud.database();
+        const address = db.collection('address');
+
+        await address.doc(this.data._id).update({
+            data:{
+                bz:val
+            }
+        }).then(rs=>{
+            this.setData({
+                textNotCanEdit:false,
+                data:newData,
+                text:val
+            });
+            wxApp.info.show('保存成功');
+        }).catch(async e=>{
+            await wxApp.alert(e);
+            this.setData({textNotCanEdit:false});
+        });
+    },
+
+    async notGoOrGo(e){
+        if(!this.data.hasGoCanTap){return;}
+
+        let data = e.target.dataset.data,
+            hasGo = (data == 0)? 1 : 0,
+            newData = this.data.data;
+        newData.hsGo = hasGo;
+
+        //阻止btn可点击
+        this.setData({hasGoCanTap:false});
+
+        //提交数据
+        const db = wx.cloud.database();
+        const address = db.collection('address');
+
+        await address.doc(this.data._id).update({
+            data:{
+                hasGo:hasGo
+            }
+        }).then(rs=>{
+            this.setData({
+                hasGoCanTap:true,
+                data:newData,
+                hasGo:hasGo
+            });
+            wxApp.info.show('保存成功');
+        }).catch(async e=>{
+            await wxApp.alert(e);
+            this.setData({hasGoCanTap:true});
+        });
 
     },
+
 
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        let id = options.id;
+        let id = options.id || 'B03440N0U0';
         if(!id){
             wxApp.goBack();
+            return;
         }
 
-        console.log(id);
+        this.init(id).then(rs=>{
 
-
-
+        }).catch(async e=>{
+            await wxApp.alert(e);
+            wxApp.goBack();
+        });
     },
 
     /**
