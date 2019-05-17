@@ -137,7 +137,7 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        let id = options.id || 'B03440N0U0';
+        let id = options.id;
         if(!id){
             wxApp.goBack();
             return;
