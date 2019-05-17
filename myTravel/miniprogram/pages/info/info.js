@@ -119,6 +119,8 @@ Page({
                 hasGo:hasGo
             }
         }).then(rs=>{
+            app.globalData.hasGoId = this.data._id;
+            app.globalData.hasGoVal = hasGo;
             this.setData({
                 hasGoCanTap:true,
                 data:newData,

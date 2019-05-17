@@ -247,6 +247,25 @@ Page({
             app.globalData.needRefresh = false;
             this.refreshPage();
         }
+
+        //需要更新 去没去过的ui
+        let _id = app.globalData.hasGoId;
+        if(app.globalData.hasGoId){
+            let data = this.data.list;
+
+            data.map(rs=>{
+                if(rs._id == _id){
+                    rs.hasGo = app.globalData.hasGoVal;
+                }
+            });
+
+            this.setData({
+                list:data
+            })
+
+
+
+        }
     },
 
     /**
