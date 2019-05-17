@@ -6,7 +6,6 @@ const regeneratorRuntime = require('../../lib/regeneratorRuntime.js'),
     app = getApp();
 
 
-//TODO 区分列表中的去过和未去过  sql排序   0 未去 1已去
 
 
 Page({
@@ -43,7 +42,7 @@ Page({
             {cityname:{$regex: '.*'+searchText+'.*'}},
             {pname:{$regex: '.*'+searchText+'.*'}}
         ]))
-            .orderBy('pname','asc')
+            .orderBy('hasGo','pname','desc')
             .limit(this.data.pageSize)
             .skip(this.data.nowIndex)
             .get();

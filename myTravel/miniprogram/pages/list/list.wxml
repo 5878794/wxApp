@@ -10,7 +10,14 @@
 
 
 <view class="list">
-    <view bind:longpress="longtap" bind:tap="listTap" class="box_slc item animate1" wx:for="{{list}}" wx:key="id" data-id="{{item.id}}" style="transform:translateX({{item.style}}rpx)">
+    <view bind:longpress="longtap"
+          bind:tap="listTap"
+          class="box_slc item animate1"
+          wx:for="{{list}}"
+          wx:key="id"
+          data-id="{{item.id}}"
+          style="transform:translateX({{item.style}}rpx);{{(item.hasGo==1)? 'color:#ccc !important' : ''}}"
+    >
         <view class="list_name">{{item.name}}</view>
         <view class="list_info box_hlc">
             <view class="list_area diandian">{{item.pname}} {{item.cityname}}</view>
